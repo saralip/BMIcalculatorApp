@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    @IBOutlet weak var metricSwitchOutlet: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +30,22 @@ class ViewController: UIViewController {
 
     
     //MARK: Actions
+    
+    @IBOutlet weak var metricSwitchOutlet: UISwitch!
+    
+    @IBAction func metricSwitchOutlet(_ sender: UISwitch) {
+        if (self.metricSwitchOutlet.isOn){
+            self.heightInputText.placeholder = "cm"
+            self.weightInputText.placeholder = "kg"
+        }
+        else{
+            
+            self.heightInputText.placeholder = "in"
+            self.weightInputText.placeholder = "lb"
+        }
+
+        
+    }
     
     @IBAction func calculatorBtn(_ sender: UIButton) {
         
