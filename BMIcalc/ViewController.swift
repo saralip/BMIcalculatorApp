@@ -17,6 +17,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var backgroundImage: UIImageView!
     
+    @IBOutlet weak var yourResults: UILabel!
+    
+    @IBOutlet weak var bmiValueLabel: UILabel!
+    
+    @IBOutlet weak var resultDisplayLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +67,7 @@ class ViewController: UIViewController {
         {
             //cm to meter
             heightFloat = (heightFloat/100.0)
-            //kg
+            //already in kg
             
             bmi = calcBMI(h: heightFloat, w: weightFloat)
         }
@@ -70,6 +76,7 @@ class ViewController: UIViewController {
         {
             //inches to meters
             heightFloat = (heightFloat * 0.0254)
+            //kgs to lbs
             weightFloat = (weightFloat * 0.453592)
             
             bmi = calcBMI(h: heightFloat, w: weightFloat)
@@ -80,34 +87,68 @@ class ViewController: UIViewController {
         print ("BMI: ")
         print(bmi)
         
+        var bmiString : String
+        bmiString = String(format: "%.2f", bmi)
+        
         var range : String
         
-        if bmi < 16.0{
+        if bmi > 0 && bmi < 16.0{
             range = "Severe Thinness"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientRed")
+
+
         }
         else if bmi >= 16.0 && bmi <= 16.99{
             range = "Moderate Thinness"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientYellow")
+
+
         }
         else if bmi >= 17.0 && bmi <= 18.49{
             range = "Mild Thinness"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientBlue")
+
+
         }
         else if bmi >= 18.5 && bmi <= 24.99{
             range = "Normal Range"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientGreen")
+
+
         }
         else if bmi >= 25.0 && bmi <= 29.99{
             range = "Overweight"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientPurple")
+
         }
         else if bmi >= 30.0 && bmi <= 34.99{
             range = "Obese Class I (Moderate)"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientCoral")
+
         }
         else if bmi >= 35.0 && bmi <= 39.99{
             range = "Obese Class II (Moderate)"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientOrange")
+
+
         }
-        else if bmi > 39.99{
+        else if bmi > 39.99 && bmi <= 205{
             range = "Obese Class III (Severe)"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "gradientRed")
         }
         else{
             range = "Out of range"
+            results(t:range, b:bmiString)
+            self.backgroundImage.image = #imageLiteral(resourceName: "graygradient")
+            
         }
         
         print(range)
@@ -121,6 +162,15 @@ class ViewController: UIViewController {
         return bmiVal
     }
 
+    func results(t: String, b: String){
+        
+        self.yourResults.text = "Your Results:"
+        self.resultDisplayLabel.textAlignment = .center
+        self.bmiValueLabel.textAlignment = .center
+        
+        self.bmiValueLabel.text = b
+        self.resultDisplayLabel.text = t
+    }
     
     
 
