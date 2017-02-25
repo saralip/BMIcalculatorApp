@@ -133,14 +133,14 @@ class ViewController: UIViewController {
 
         }
         else if bmi >= 35.0 && bmi <= 39.99{
-            range = "Obese Class II (Moderate)"
+            range = "Obese Class II (Severe)"
             results(t:range, b:bmiString)
             self.backgroundImage.image = #imageLiteral(resourceName: "gradientOrange")
 
 
         }
         else if bmi > 39.99 && bmi <= 205{
-            range = "Obese Class III (Severe)"
+            range = "Obese Class III (Very Severe)"
             results(t:range, b:bmiString)
             self.backgroundImage.image = #imageLiteral(resourceName: "gradientRed")
         }
